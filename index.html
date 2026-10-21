@@ -1420,4 +1420,28 @@ $("demo-reset")?.addEventListener("click",()=>{ try{ localStorage.removeItem("ta
 })();
 </script>
 
+<script>
+// En la versión demo no hay Claude detrás: el botón enseña un ejemplo de conversación y explica dónde funciona de verdad
+if (window.__DEMO) {
+  const boton = document.getElementById("ia-abrir");
+  boton.hidden = false;
+  boton.addEventListener("click", () => {
+    const log = document.getElementById("ia-log");
+    document.getElementById("ia-ej").innerHTML = "";
+    document.getElementById("ia-texto").disabled = true;
+    document.getElementById("ia-texto").placeholder = "Disponible en la versión completa, dentro de Claude";
+    document.getElementById("ia-enviar").disabled = true;
+    document.getElementById("ia-sub").textContent = "Ejemplo de cómo funciona";
+    log.innerHTML = `
+      <div class="ia-msg ia"><p style="margin:0"><b>Esto es un ejemplo.</b> El asistente es un agente con IA que usa las herramientas de la app sobre los datos reales. Funciona en la versión completa, dentro de Claude, porque necesita la cuenta de quien lo usa.</p></div>
+      <div class="ia-msg yo">Ayer estuve 1 hora y media en una formación</div>
+      <div class="ia-paso">· Buscando tareas parecidas…</div>
+      <div class="ia-paso">· Guardando horas…</div>
+      <div class="ia-msg ia"><p style="margin:0 0 6px">Hecho. He apuntado <b>1,5 h</b> de ayer en el cliente interno <b>TAGSE</b>, tarea <b>FORMACION</b>.</p><p style="margin:0">Es trabajo interno, así que va como no facturable.</p></div>
+      <div class="ia-msg yo">¿Qué clientes consumieron más horas sin facturar en el primer trimestre de 2024?</div>
+      <div class="ia-paso">· Calculando horas por cliente…</div>
+      <div class="ia-msg ia"><p style="margin:0 0 6px">Sin contar el trabajo interno de TAGSE, los conceptos con más horas no facturables son:</p><ul><li><b>LABORAL</b>: 364 h</li><li><b>DECLARACIONES</b>: 87 h</li><li><b>TAREAS COMERCIALES</b>: 59 h</li></ul><p style="margin:0">Son tareas generales de los clientes de cuota: conviene revisar si las cuotas las cubren.</p></div>`;
+  });
+}
+</script>
 </body></html>
